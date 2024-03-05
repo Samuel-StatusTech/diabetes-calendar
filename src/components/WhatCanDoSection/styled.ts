@@ -38,6 +38,10 @@ export const SectionTitle = styled.h3`
   font-size: 4rem;
   font-weight: 800;
   text-align: center;
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.phone}px) {
+    font-size: 3.6rem;
+  }
 `
 
 export const GridPoints = styled.div`
@@ -45,6 +49,15 @@ export const GridPoints = styled.div`
   grid-template-columns: repeat(2, 1fr);
   column-gap: 13rem;
   row-gap: 4.3rem;
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.tablet}px) {
+    column-gap: 4rem;
+    row-gap: 4rem;
+  }
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.phone + 80}px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
 
 export const GridPoint = styled.div`
@@ -57,10 +70,18 @@ export const GPTitle = styled.span`
   font-size: 2.6rem;
   font-weight: 800;
   color: ${({ theme }) => theme.pallete.white.pure};
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.phone}px) {
+    font-size: 2.2rem;
+  }
 `
 
 export const GPText = styled.span`
   font-size: 1.8rem;
   font-weight: 400;
   color: ${({ theme }) => theme.pallete.white.pure};
+  
+  /* @media (max-width: ${({theme}) => theme.breakpoints.phone}px) {
+    font-size: 1.6rem;
+  } */
 `

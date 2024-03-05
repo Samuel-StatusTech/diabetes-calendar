@@ -10,4 +10,17 @@ export const Wrapper = styled.div`
   border-bottom-right-radius: 40px;
   padding: 52px 0 60px;
   box-shadow: 0 66px 47px -42px rgba(0, 0, 0, 0.25);
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.tablet}px) {
+    svg {
+      width: 320px;
+      height: auto;
+    }
+  }
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.phone}px) {
+    svg {
+      width: 240px;
+    }
+  }
 `

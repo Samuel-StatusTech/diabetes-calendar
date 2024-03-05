@@ -6,10 +6,20 @@ export const Area = styled.div`
   gap: 3.5rem;
   width: 100%;
   max-width: 380px;
+  height: fit-content;
   background-color: #fff;
-  border-radius: 40px 40px 80px 80px;
-  padding: 25px 50px 70px;
+  border-radius: 4rem 4rem 8rem 8rem;
+  padding: 2.5rem 5rem 7rem;
   position: relative;
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.tablet}px) {
+    max-width: unset;
+  }
+  
+  @media (max-width: ${({theme}) => theme.breakpoints.phone}px) {
+    border-radius: 2rem 2rem 4rem 4rem;
+    padding: 2.5rem 2.5rem 6rem;
+  }
 `
 
 export const IArea = styled.div`
@@ -48,6 +58,7 @@ export const NIBox = styled.div`
   input {
     border: none;
     text-align: center;
+    flex: 1;
   }
 
   &:has(input:focus),

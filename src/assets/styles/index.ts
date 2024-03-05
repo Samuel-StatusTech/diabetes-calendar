@@ -18,6 +18,11 @@ const theme = {
       dark: '#ABA7AF',
       light: '#E5E0EB'
     }
+  },
+  breakpoints: {
+    phone: 540,
+    tablet: 840,
+    note: 1140,
   }
 }
 

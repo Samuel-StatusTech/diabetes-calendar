@@ -1,10 +1,14 @@
 import styled from "styled-components"
 
-
 export const Area = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
+    flex-direction: column;
+    gap: 5.2rem;
+  }
 `
 
 export const Texts = styled.div`
@@ -12,6 +16,13 @@ export const Texts = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 6.9rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
+    gap: 5.2rem;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.phone}px) {
+  }
 `
 
 export const Block = styled.div`

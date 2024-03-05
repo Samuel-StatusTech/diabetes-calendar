@@ -1,5 +1,5 @@
 import React from 'react'
-import Container from '../../components/_conteiner'
+import Container from '../../components/_container'
 import Header from '../../components/header'
 import * as S from './styled'
 import SubscribeSection from '../../components/SubscribeSection'
