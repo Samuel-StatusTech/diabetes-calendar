@@ -46,8 +46,9 @@ const Form = ({ toggleModal }: Props) => {
 
       // sendEmail
       await Api.sendEmail({ name, age, email })
-        .then(() => {
-          toggleModal()
+        .then((res) => {
+          if (res) toggleModal()
+          else setFailedSend(true)
         })
         .catch(() => {
           setFailedSend(true)
@@ -60,6 +61,8 @@ const Form = ({ toggleModal }: Props) => {
   }
 
   const handleField = (field: "name" | "age" | "email", value: string) => {
+    if (failedSend) setFailedSend(false)
+
     switch (field) {
       case "name":
         setName(value)

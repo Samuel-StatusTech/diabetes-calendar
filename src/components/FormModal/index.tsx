@@ -1,7 +1,7 @@
 import React from "react"
 import * as S from "./styled"
 
-const formLink = process.env.REACT_APP_BASE_URL as string
+const formLink = "https://forms.gle/mpCT3T7xJgxWbr6C7"
 
 type Props = {
   toggleModal: () => void

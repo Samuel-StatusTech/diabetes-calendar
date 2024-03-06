@@ -4,7 +4,7 @@ type Props = {
   email: string
 }
 
-const base_url = "http://localhost:8080/api"
+const base_url = process.env.REACT_APP_BASE_URL
 
 const sendEmail = async ({ name, age, email }: Props) => {
   try {
