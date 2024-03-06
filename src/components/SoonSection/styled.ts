@@ -64,7 +64,7 @@ export const DownloadBtn = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.pallete.white.pure};
+  background-color: transparent;
   border-radius: 1.6rem;
   
   @media (max-width: ${({theme}) => theme.breakpoints.phone}px) {

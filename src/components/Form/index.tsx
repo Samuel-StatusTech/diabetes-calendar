@@ -1,8 +1,16 @@
 import React, { useState } from "react"
 import * as S from "./styled"
 import { MinusIcon, PlusIcon } from "../../assets/icons"
+import { Api } from "../../api"
 
-const Form = () => {
+type Props = {
+  toggleModal: () => void
+}
+
+const Form = ({ toggleModal }: Props) => {
+  const [submitting, setSubmitting] = useState(false)
+  const [failedSend, setFailedSend] = useState(false)
+
   const [name, setName] = useState("")
   const [age, setAge] = useState(0)
   const [email, setEmail] = useState("")
@@ -21,6 +29,50 @@ const Form = () => {
     setAge(age + 1)
   }
 
+  const verifyErrors = () => {
+    let matchEmail = new RegExp(/^[\w.-]+@[\w.-]+\.\w{2,}$/).test(email)
+
+    if (!name.trim()) return "name"
+    if (!age || age < 0) return "age"
+    if (!email.trim() || !matchEmail) return "email"
+
+    return false
+  }
+
+  const handleSubmit = async () => {
+    const errors = verifyErrors()
+    if (!errors) {
+      setSubmitting(true)
+
+      // sendEmail
+      await Api.sendEmail({ name, age, email })
+        .then(() => {
+          toggleModal()
+        })
+        .catch(() => {
+          setFailedSend(true)
+        })
+
+      setSubmitting(false)
+    } else {
+      console.log(errors)
+    }
+  }
+
+  const handleField = (field: "name" | "age" | "email", value: string) => {
+    switch (field) {
+      case "name":
+        setName(value)
+        break
+      case "age":
+        handleAge(value)
+        break
+      case "email":
+        setEmail(value)
+        break
+    }
+  }
+
   return (
     <S.Area>
       <S.IArea>
@@ -28,7 +80,7 @@ const Form = () => {
         <S.Input
           placeholder="Informe seu nome"
           value={name}
-          onChange={(ev) => setName(ev.target.value)}
+          onChange={(ev) => handleField("name", ev.target.value)}
         />
       </S.IArea>
       <S.IArea>
@@ -40,7 +92,7 @@ const Form = () => {
           <S.Input
             placeholder="00"
             value={String(age).padStart(2, "0")}
-            onChange={(ev) => handleAge(ev.target.value)}
+            onChange={(ev) => handleField("age", ev.target.value)}
           />
           <S.ControlBtn onClick={increaseAge}>
             <PlusIcon />
@@ -52,11 +104,14 @@ const Form = () => {
         <S.Input
           placeholder="Informe seu melhor e-mail"
           value={email}
-          onChange={(ev) => setEmail(ev.target.value)}
+          onChange={(ev) => handleField("email", ev.target.value)}
         />
       </S.IArea>
-      <S.SubmitButton>
-        <span>Quero me cadastrar</span>
+      <S.Error visible={failedSend}>
+        Verifique os campos e tente novamente
+      </S.Error>
+      <S.SubmitButton onClick={handleSubmit} disabled={submitting}>
+        <span>{submitting ? "Enviando..." : "Quero me cadastrar"}</span>
       </S.SubmitButton>
     </S.Area>
   )
